@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import Cart from "./Cart";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
+import About from "../pages/About";
+import Error from "../pages/Error";
 
 class App extends Component {
   state = {
@@ -39,19 +41,24 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar productsCount={this.state.products.length} />
+        <Navbar
+          productsCount={this.state.products.filter((p) => p.count > 0).length}
+        />
         <main className="container">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<Error />} />
+
             <Route
               path="/cart"
               Component={(props) => (
                 <Cart
                   products={this.state.products}
-                  onIncrement={this.incHandler}
-                  onDelete={this.deleteHandler}
-                  onReset={this.resetHandler}
+                  incHandler={this.incHandler}
+                  deleteHandler={this.deleteHandler}
+                  resetHandler={this.resetHandler}
                   {...props}
                 />
               )}

@@ -38,7 +38,7 @@ const Navbar = (props) => {
 
       <Link to="/cart">
         <span className="badge bg-primary">
-          <i style={{ color: "white" }} className="fas fa-cart-plus m-2"></i>
+          <i style={{ color: "white" }} className="fas fa-cart-plus m-1"></i>
           {props.productsCount}
         </span>
       </Link>
