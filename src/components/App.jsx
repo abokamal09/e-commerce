@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
 import Cart from "./Cart";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "../pages/Home";
 
 class App extends Component {
   state = {
@@ -37,14 +39,24 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar products={this.state.products} />
+        <Navbar productsCount={this.state.products.length} />
         <main className="container">
-          <Cart
-            products={this.state.products}
-            deleteHandler={this.deleteHandler}
-            resetHandler={this.resetHandler}
-            incHandler={this.incHandler}
-          />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route
+              path="/cart"
+              Component={(props) => (
+                <Cart
+                  products={this.state.products}
+                  onIncrement={this.incHandler}
+                  onDelete={this.deleteHandler}
+                  onReset={this.resetHandler}
+                  {...props}
+                />
+              )}
+            />
+          </Routes>
         </main>
       </React.Fragment>
     );
