@@ -5,6 +5,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Error from "../pages/Error";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Dashboard from "../pages/Dashboard";
 
 class App extends Component {
   state = {
@@ -50,6 +52,9 @@ class App extends Component {
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<Error />} />
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
+            </Route>
 
             <Route
               path="/cart"
